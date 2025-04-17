@@ -1,0 +1,113 @@
+# VacancyMail Job Scraper
+======================
+
+A Python script that scrapes job listings from [VacancyMail.co.zw](https://vacancymail.co.zw/jobs/) and saves them to a CSV file. The script runs hourly and maintains a log of all operations.
+
+## Features
+--------
+
+* Scrapes job listings every hour
+* Extracts job titles, companies, locations, expiry dates, and descriptions
+* Saves data to CSV format
+* Comprehensive error logging
+* Debug mode available for development
+
+## Requirements
+------------
+
+* Python 3.x
+* Required packages:
+  * `requests`
+  * `beautifulsoup4`
+  * `pandas`
+  * `schedule`
+
+## Installation
+------------
+
+1. Clone the repository:
+   ```bash
+git clone https://github.com/yourusername/vacancymail-scraper.git
+cd vacancymail-scraper
+```
+
+2. Install dependencies:
+   ```bash
+pip install -r requirements.txt
+```
+
+## Usage
+-----
+
+### Manual Run
+To run the scraper once:
+```bash
+python scraper.py
+```
+
+### Continuous Operation
+To start the hourly scheduler:
+```bash
+python scraper.py --continuous
+```
+
+## Output Files
+-------------
+
+The script generates two files:
+
+1. **scraped_jobs.csv**: Contains the scraped job listings with columns:
+   - Job Title
+   - Company
+   - Location
+   - Expiry Date
+   - Job Description
+
+2. **scraper.log**: Detailed log file tracking all operations and errors
+
+## Code Structure
+-------------
+
+### Main Components
+
+1. **Web Scraping**
+   - Uses BeautifulSoup for parsing HTML
+   - Implements proper headers for browser simulation
+   - Handles pagination (first 10 listings)
+
+2. **Data Processing**
+   - Converts scraped data to Pandas DataFrame
+   - Saves to CSV format with UTF-8 encoding
+   - Includes error handling for missing data
+
+3. **Logging**
+   - Configured logging system with timestamps
+   - Logs all scraping operations
+   - Tracks errors and exceptions
+
+4. **Scheduling**
+   - Uses schedule library for hourly runs
+   - Includes initial run before scheduling starts
+
+## Debug Mode
+-------------
+
+To debug the HTML structure, uncomment the line in the scrape_jobs() function:
+```python
+# debug_html(soup)  # Uncomment for debugging
+```
+
+## License
+-------
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
